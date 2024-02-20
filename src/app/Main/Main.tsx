@@ -1,23 +1,40 @@
-import { useEffect, useState } from "react";
-import CityListComponent from "../../components/cityListComponent";
-import WeatherComponent from "../../components/weatherComponent";
-import "./Main.scss";
+import { useEffect, useState } from 'react';
+
+import CityList from '../../components/CityList/CityList';
+import LeftPanel from '../../components/LeftPanel/LeftPanel';
+import WeatherContainer from '../../components/WeatherContainer/WeatherContainer';
+
+import './Main.scss';
+import { BrowserStorageManager } from '../../utils/BrowserStorageManager';
+
+const CITY_STORAGE_KEY = 'CITY';
 
 const MainPage = () => {
-  const [selectedCity, setSelectedCity] = useState<string>(''); // Dodaj stan dla wybranego miasta
+   const [selectedCity, setSelectedCity] = useState<string>('');
 
-  const handleCitySelect = (city: string) => { // Dodaj tę funkcję
-    setSelectedCity(city);
-  }
+   const handleCitySelect = (city: string) => {
+      setSelectedCity(city);
+      // BrowserStorageManager.writeLocalStorage(CITY_STORAGE_KEY, city);
+      window.localStorage.setItem(CITY_STORAGE_KEY, selectedCity);
+   };
 
-  return(
-    <>
-      <WeatherComponent city={selectedCity}/> {/* Przekaż wybrane miasto do WeatherComponent */}
-      <form>
-        <CityListComponent cities={['Poznań', 'Warszawa']} onCitySelect={handleCitySelect} /> {/* Przekaż funkcję handleCitySelect do CityListComponent */}
-      </form>
-    </>
-  )
+   useEffect(() => {
+      const city = BrowserStorageManager.readLocalStorage<string>(CITY_STORAGE_KEY);
+      // const city = window.localStorage.getItem(CITY_STORAGE_KEY) as string;
+      console.log('useEffect ~ city:', city);
+   }, [selectedCity]);
+
+   return (
+      <div className="panels">
+         <center>
+            <WeatherContainer city={selectedCity} />
+         </center>
+         <LeftPanel city={selectedCity} />
+         <form>
+            <CityList cities={['Poznań', 'Warszawa']} onCitySelect={handleCitySelect} />
+         </form>
+      </div>
+   );
 };
 
 export default MainPage;

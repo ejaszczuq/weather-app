@@ -1,11 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import { Router } from "../router/router";
+import { Router } from '../router/router';
 
-import "../scss/base.scss";
+import '../scss/base.scss';
+import '../scss/responsive.scss';
 
 const App = () => {
-  return <Router />;
+   return <Router />;
 };
 
 export default App;

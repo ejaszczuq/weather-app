@@ -1,9 +1,50 @@
 $white-1: #fafafc;
+$white-2: #c5c5c5;
+
+$black-1: rgba(0, 0, 0, 0.939);
 
 // BREAKPOINTS
 $xs: 320px;
 $sm: 576px;
 $md: 768px;
 $lg: 992px;
-$xl: 1024px;
+$xl: 1200px;
 $xxl: 1440px;
+
+$breakpoints: (
+   xs: '$xs',
+   sm: '$sm',
+   md: '$md',
+   lg: '$lg',
+   xl: '$xl',
+   xxl: '$xxl',
+);
+
+// SIZES
+$size-variants: (
+   0: 0,
+   1: 2px,
+   2: 4px,
+   3: 8px,
+   4: 16px,
+   5: 24px,
+   6: 32px,
+   7: 40px,
+   8: 48px,
+   9: 64px,
+   10: 80px,
+   11: 96px,
+   12: 160px,
+);
+
+// FONT WEIGHT'S
+$thin: 100;
+$extra-light: 200;
+$light: 300;
+$regular: 400;
+$medium: 500;
+$semi-bold: 600;
+$bold: 700;
+$extra-bold: 800;
+$black: 900;
+$extra-black: 950;

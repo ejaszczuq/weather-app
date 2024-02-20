@@ -1,0 +1,33 @@
+@use 'src/scss/global.scss' as *;
+
+.container-leftPanel {
+    width: 185px;
+    height: 435px;
+    background-color: #1d1d1d;
+    border-radius: 25px;
+
+    input {
+       width: 108px;
+       height: 23px;
+       border-radius: 20px;
+       background-color: #1A1A1A; 
+       border: 1.7px solid #141414;
+    }
+
+    .line {
+        display: flex;
+        gap: 5px;
+        margin-left: 20px;
+        padding-top: 30px;
+    }
+
+    .cardsBox {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-left: 7%;
+        padding-top: 20px;
+        overflow: hidden;
+        height: 350px;
+    }
+}

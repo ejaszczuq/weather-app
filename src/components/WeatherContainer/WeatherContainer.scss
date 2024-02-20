@@ -1,0 +1,45 @@
+@use 'src/scss/variables.scss' as *;
+
+
+
+.container {
+    width: 340px;
+    height: 435px;
+    background-color: #1d1d1d;
+    border-radius: 27px;
+    padding-top: 30px;
+
+    .line {
+        width: 300px;
+        margin-bottom: 7.5%;
+        
+        .arrow-left {
+        float: left;
+        margin-left: 10px;
+        }
+
+        .arrow-right {
+            float: right;
+            margin-right: 10px;
+        }
+
+        .date {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                color: $white-2;
+            }
+
+            input {
+                border-radius: 40px;
+                width: 138px;
+                height: 24px;
+                background-color: #1a1a1a;
+                border: 1.7px solid #141414;
+                margin-top: 3px;
+            }
+        }
+    }
+}

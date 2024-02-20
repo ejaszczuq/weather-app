@@ -1,2 +1,21 @@
-@use "src/scss/global.scss" as *;
+@use 'src/scss/global.scss' as *;
 
+.panels {
+   display: flex;
+   flex-direction: row;
+   // @include group();
+
+   gap: 20px;
+
+   .dupa {
+      width: 200px;
+      height: 100px;
+      border: 1px dotted red;
+   }
+
+   .dupa--grzeczna {
+      @extend .dupa;
+
+      background: red;
+   }
+}

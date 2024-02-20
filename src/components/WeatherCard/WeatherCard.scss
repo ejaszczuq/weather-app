@@ -1,0 +1,98 @@
+@use 'src/scss/global.scss' as *;
+
+.wCardBox {
+
+    &.variant1, &.variant2 { 
+        background: rgb(30,26,131);
+        background: -moz-linear-gradient(342deg, rgba(30,26,131,1) 10%, rgba(81,81,228,1) 35%, rgba(52,216,250,1) 100%);
+        background: -webkit-linear-gradient(342deg, rgba(30,26,131,1) 10%, rgba(81,81,228,1) 35%, rgba(52,216,250,1) 100%);
+        background: linear-gradient(342deg, rgba(30,26,131,1) 10%, rgba(81,81,228,1) 35%, rgba(52,216,250,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1e1a83",endColorstr="#34d8fa",GradientType=1);
+        color: #fff;
+    }
+    &.variant1 {
+        height: 300px;
+        width: 250px;
+        border-radius: 15px;
+        
+          
+          
+    .date {
+        font-size: 11px;
+        padding-top: 30px;
+        margin-left: 45px;
+        font-weight: 200;
+    }
+
+    .weatherMainInfo {
+        font-size: 16px;
+        text-align: center;
+        margin-top: 10px;
+        font-weight: 200;
+        display: flex;
+        gap: 10px;
+        margin: 5px;
+        margin-bottom: 10px;
+::after {
+            content: "";
+            display: inline-block;
+            height: 32px;
+            width: 32px;
+            background: url(data:image/png;base64,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) no-repeat;
+            background-size: contain;
+            margin-top: 12px;
+          }
+        hr {
+            width: 40%;
+            height: 0;
+            border: 1px solid white;
+            margin: 5px;
+        }
+    }
+
+    .line {
+        display: flex;
+        height: 50px;
+        max-width: 180px;
+        gap: 15px;
+        margin-top: 4px;
+
+       img {
+            margin-left: -10px;
+       }
+
+        .cityName {
+            font-size: 15px;
+            padding-top: 8px;
+        }
+        .temp {
+            font-weight: 800;
+            font-size: 32px;
+            padding-top: 5px;
+        }
+    }
+}
+&.variant2 {
+    width: 160px;
+    height: 75px;
+    border-radius: 20px;
+
+    hr, .date, .weatherMainInfo {
+        display: none;
+    }
+
+    .cityName {
+        font-size: 14px;
+    }
+    .temp {
+        font-weight: 700;
+        font-size: 16px;
+        padding-top: 2px;
+    }
+    img {
+        margin-left: -5px;
+        height: 32px;
+        width: 32px;
+    }
+}
+}
