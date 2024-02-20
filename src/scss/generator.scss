@@ -1,0 +1,61 @@
+@use './global.scss' as *;
+
+/* 
+  Method of use:
+  - Install globaly sass
+  - Run sass generator.scss style.css (Remember to provide variables)
+  
+  Commands: 
+  npm install -g sass
+  sass generator.scss style.css
+*/
+
+@each $size-key, $size-val in $size-variants {
+   .m-#{$size-key} {
+      margin: $size-val;
+   }
+   .my-#{$size-key} {
+      margin-top: $size-val;
+      margin-bottom: $size-val;
+   }
+   .mx-#{$size-key} {
+      margin-left: $size-val;
+      margin-right: $size-val;
+   }
+   .mt-#{$size-key} {
+      margin-top: $size-val;
+   }
+   .mr-#{$size-key} {
+      margin-right: $size-val;
+   }
+   .mb-#{$size-key} {
+      margin-bottom: $size-val;
+   }
+   .ml-#{$size-key} {
+      margin-left: $size-val;
+   }
+
+   .p-#{$size-key} {
+      padding: $size-val;
+   }
+   .py-#{$size-key} {
+      padding-top: $size-val;
+      padding-bottom: $size-val;
+   }
+   .px-#{$size-key} {
+      padding-left: $size-val;
+      padding-right: $size-val;
+   }
+   .pt-#{$size-key} {
+      padding-top: $size-val;
+   }
+   .pr-#{$size-key} {
+      padding-right: $size-val;
+   }
+   .pb-#{$size-key} {
+      padding-bottom: $size-val;
+   }
+   .pl-#{$size-key} {
+      padding-left: $size-val;
+   }
+}
