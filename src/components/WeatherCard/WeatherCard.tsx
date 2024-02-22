@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { WeatherService } from '../../services/weatherApi/weatherService';
 
 import './WeatherCard.scss';
-import { getWeather } from '../../services/weatherApi/methods';
 
 interface IWeather {
-   city: string;
+   city?: string;
+   latitude?: number;
+   longitude?: number;
    variant: string;
 }
+
 interface IWeatherData {
    name: string;
    weather: { main: string; description: string }[];
@@ -16,23 +18,28 @@ interface IWeatherData {
    visibility: number;
 }
 
-function WeatherCard({ city, variant }: IWeather) {
+function WeatherCard({ city, latitude, longitude, variant }: IWeather) {
    const [weatherData, setWeatherData] = useState<IWeatherData | null>(null);
 
    useEffect(() => {
       async function fetchWeather() {
          try {
-            // const data = await WeatherService.getWeather(city);
-            const res = await getWeather(city);
-            setWeatherData(res.data);
-            console.log('fetchWeather ~ data:', res.data);
+            let res;
+            if (city) {
+               res = await WeatherService.getWeatherByCity(city);
+            } else if (latitude && longitude) {
+               res = await WeatherService.getWeatherByCoords(latitude, longitude);
+            }
+            if (res) {
+               setWeatherData(res.data);
+            }
          } catch (error) {
             console.error(error);
          }
       }
 
       fetchWeather();
-   }, [city]);
+   }, [city, latitude, longitude]);
 
    let currentDate = new Date();
 

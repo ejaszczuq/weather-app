@@ -1,40 +1,45 @@
-import React from 'react';
-import WeatherCard from '../WeatherCard/WeatherCard';
+import React, { useEffect, useState } from 'react';
+import { WeatherService } from '../../services/weatherApi/weatherService';
 
 import './WeatherContainer.scss';
 
-function WeatherContainer({ city }: { city: string }) {
-   return (
-      <div className="container">
-         <div className="line">
-            <img
-               width="32"
-               height="32"
-               src="https://img.icons8.com/cotton/64/circled-chevron-right--v2.png"
-               alt="circled-chevron-right--v2"
-               className="arrow-right"
-            />
-            <img
-               width="32"
-               height="32"
-               src="https://img.icons8.com/cotton/64/circled-chevron-left--v2.png"
-               alt="circled-chevron-left--v2"
-               className="arrow-left"
-            />
+interface IWeatherContainer {
+   city: string;
+}
 
-            <div className="date">
-               <label htmlFor="date">Date</label>
-               <center>
-                  <input
-                     type="text"
-                     placeholder=""
-                     onFocus={(event) => (event.currentTarget.type = 'date')}
-                     onBlur={(event) => (event.currentTarget.type = 'text')}
-                  />
-               </center>
+function WeatherContainer({ city }: IWeatherContainer) {
+   const [weatherData, setWeatherData] = useState<any | null>(null);
+
+   useEffect(() => {
+      async function fetchWeather() {
+         try {
+            let res;
+            if (city) {
+               res = await WeatherService.getWeatherByCity(city);
+            } else {
+               const coords = city.split(',');
+               res = await WeatherService.getWeatherByCoords(parseFloat(coords[0]), parseFloat(coords[1]));
+            }
+            if (res) {
+               setWeatherData(res.data);
+            }
+         } catch (error) {
+            console.error(error);
+         }
+      }
+
+      fetchWeather();
+   }, [city]);
+
+   return (
+      <div className="container-weatherContainer">
+         {weatherData && (
+            <div className="line">
+               <h2 className="cityName">{weatherData.name}</h2>
+               <img src="images/sun.png" alt="weather-icon" height={50} width={45} />
+               <p className="temp">{Math.round(weatherData.main.temp)}°C</p>
             </div>
-         </div>
-         <WeatherCard city={city} variant="variant1" />
+         )}
       </div>
    );
 }

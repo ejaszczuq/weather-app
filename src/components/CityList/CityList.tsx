@@ -15,9 +15,9 @@ const CityListComponent: React.FC<ICityList> = ({ cities, onCitySelect }) => {
       onCitySelect(cities[parseInt(event.target.value.split('-')[1])]);
    };
 
-   //    const listItems = useEffect(() => {
-   //       console.log(`Selected value: ${selectedCity}`);
-   //    }, [selectedCity]);
+   // const listItems = useEffect(() => {
+   //    console.log(`Selected value: ${selectedCity}`);
+   // }, [selectedCity]);
 
    return (
       <ul>

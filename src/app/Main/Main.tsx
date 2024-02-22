@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import CityList from '../../components/CityList/CityList';
 import LeftPanel from '../../components/LeftPanel/LeftPanel';
 import WeatherContainer from '../../components/WeatherContainer/WeatherContainer';
+import useGeolocation from '../../hooks/useGeolocation';
 
 import './Main.scss';
 import { BrowserStorageManager } from '../../utils/BrowserStorageManager';
@@ -11,6 +12,7 @@ const CITY_STORAGE_KEY = 'CITY';
 
 const MainPage = () => {
    const [selectedCity, setSelectedCity] = useState<string>('');
+   const userLocation = useGeolocation();
 
    const handleCitySelect = (city: string) => {
       setSelectedCity(city);
@@ -27,9 +29,11 @@ const MainPage = () => {
    return (
       <div className="panels">
          <center>
-            <WeatherContainer city={selectedCity} />
+            <WeatherContainer
+               city={selectedCity || (userLocation ? userLocation.latitude + ',' + userLocation.longitude : '')}
+            />
          </center>
-         <LeftPanel city={selectedCity} />
+         <LeftPanel city={selectedCity || (userLocation ? userLocation.latitude + ',' + userLocation.longitude : '')} />
          <form>
             <CityList cities={['Poznań', 'Warszawa']} onCitySelect={handleCitySelect} />
          </form>
