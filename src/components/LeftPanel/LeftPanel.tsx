@@ -1,6 +1,8 @@
 import React from 'react';
 import WeatherCard from '../WeatherCard/WeatherCard';
 
+import { useWeather } from '../../contexts/WeatherContext';
+
 import './LeftPanel.scss';
 
 interface ILeftPanelProps {
@@ -8,6 +10,8 @@ interface ILeftPanelProps {
 }
 
 function LeftPanel({ city }: ILeftPanelProps) {
+
+   const { cities } = useWeather();
    return (
       <div className="container-leftPanel">
          <div className="line">
@@ -16,11 +20,9 @@ function LeftPanel({ city }: ILeftPanelProps) {
          </div>
 
          <div className="cardsBox">
-            <WeatherCard city={city} variant="variant2" />
-            <WeatherCard city={city} variant="variant2" />
-            <WeatherCard city={city} variant="variant2" />
-            {/* <WeatherCard city={city} variant="variant2"/> */}
-            {/* <WeatherCard city={city} variant="variant2"/> */}
+            {cities.map(city => (
+               <WeatherCard key={city} city={city} variant="variant2" />
+            ))}
          </div>
       </div>
    );

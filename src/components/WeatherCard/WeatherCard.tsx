@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { WeatherService } from '../../services/weatherApi/weatherService';
+
+import { getWeatherByCity, getWeatherByCoords } from '../../services/weatherApi/methods';
 
 import './WeatherCard.scss';
-import { getWeather } from '../../services/weatherApi/methods';
+import { AxiosResponse } from 'axios';
 
 interface IWeather {
-   city: string;
+   city?: string;
+   latitude?: number;
+   longitude?: number;
+
    variant: string;
 }
 interface IWeatherData {
@@ -16,23 +20,33 @@ interface IWeatherData {
    visibility: number;
 }
 
-function WeatherCard({ city, variant }: IWeather) {
+function WeatherCard({ city, latitude, longitude, variant }: IWeather) {
    const [weatherData, setWeatherData] = useState<IWeatherData | null>(null);
 
    useEffect(() => {
-      async function fetchWeather() {
+      const fetchWeather = async () => {
          try {
-            // const data = await WeatherService.getWeather(city);
-            const res = await getWeather(city);
-            setWeatherData(res.data);
-            console.log('fetchWeather ~ data:', res.data);
-         } catch (error) {
-            console.error(error);
+            let res: AxiosResponse<any>;
+
+            if (city) {
+               res = await getWeatherByCity(city);
+            } else if (latitude && longitude) {
+               res = await getWeatherByCoords(latitude, longitude);
+            } else {
+               console.log('No city or coordinates provided.');
+               return;
+            }
+
+            if (res && res.status === 200) {
+               setWeatherData(res.data);
+            }
+         } catch (e) {
+            console.error(e);
          }
-      }
+      };
 
       fetchWeather();
-   }, [city]);
+   }, [city, latitude, longitude]);
 
    let currentDate = new Date();
 
